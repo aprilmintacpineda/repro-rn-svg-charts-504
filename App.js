@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { Text as RNText, View, StyleSheet, Alert } from 'react-native';
 import { Path } from 'react-native-svg';
 import { Circle } from 'react-native-svg';
 import { TSpan, Text, G } from 'react-native-svg';
@@ -7,50 +7,92 @@ import { PieChart, ProgressCircle } from 'react-native-svg-charts';
 
 const amount = 100 / 7;
 
+const styles = StyleSheet.create({
+  titles: {
+    color: '#fff',
+    fontSize: 20
+  }
+});
+
 const data = [
   {
     key: 1,
     amount,
-    svg: { fill: '#212120' },
+    svg: {
+      fill: '#212120',
+      onPress: () => {
+        Alert.alert('onPress', '1')
+      }
+    },
     label: '1',
     completedAt: new Date()
   },
   {
     key: 2,
     amount,
-    svg: { fill: '#212120' },
+    svg: {
+      fill: '#212120',
+      onPress: () => {
+        Alert.alert('onPress', '2')
+      }
+    },
     label: '2',
     completedAt: new Date()
   },
   {
     key: 3,
     amount,
-    svg: { fill: '#212120' },
+    svg: {
+      fill: '#212120',
+      onPress: () => {
+        Alert.alert('onPress', '3')
+      }
+    },
     label: '3',
     completedAt: new Date()
   },
   {
     key: 4,
     amount,
-    svg: { fill: '#15ABA6' },
+    svg: {
+      fill: '#15ABA6',
+      onPress: () => {
+        Alert.alert('onPress', '4')
+      }
+    },
     label: '4'
   },
   {
     key: 5,
     amount,
-    svg: { fill: '#DCE0E5' },
+    svg: {
+      fill: '#DCE0E5',
+      onPress: () => {
+        Alert.alert('onPress', '5')
+      }
+    },
     label: '5'
   },
   {
     key: 6,
     amount,
-    svg: { fill: '#DCE0E5' },
+    svg: {
+      fill: '#DCE0E5',
+      onPress: () => {
+        Alert.alert('onPress', '6')
+      }
+    },
     label: '6'
   },
   {
     key: 7,
     amount,
-    svg: { fill: '#DCE0E5' },
+    svg: {
+      fill: '#DCE0E5',
+      onPress: () => {
+        Alert.alert('onPress', '7')
+      }
+    },
     label: '7'
   }
 ];
@@ -128,6 +170,7 @@ const Labels = React.memo(({ slices }) => {
 function App () {
   return (
     <View style={{ flex: 1, paddingVertical: 32, paddingHorizontal: 22, backgroundColor: 'gray', overflow: 'visible' }}>
+      <RNText style={styles.titles}>Pie Chart onPress here does not work.</RNText>
       <ProgressCircle
         style={{ height: 300 }}
         strokeWidth={10}
@@ -144,6 +187,16 @@ function App () {
           <Labels />
         </PieChart>
       </ProgressCircle>
+      <RNText style={styles.titles}>Pie Chart onPress here works.</RNText>
+      <PieChart
+        style={{ height: 260, marginTop: 20, borderWidth: 1, borderColor: '#000' }}
+        valueAccessor={({ item }) => item.amount}
+        data={data}
+        spacing={0}
+        innerRadius="45%"
+      >
+        <Labels />
+      </PieChart>
     </View>
   );
 }
